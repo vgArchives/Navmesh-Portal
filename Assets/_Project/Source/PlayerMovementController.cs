@@ -3,6 +3,7 @@ using UnityEngine.AI;
 
 namespace TheWatch.Core
 {
+    [RequireComponent(typeof(PlayerManager))]
     [RequireComponent(typeof(NavMeshAgent))]
     public class PlayerMovementController : MonoBehaviour
     {
@@ -10,26 +11,30 @@ namespace TheWatch.Core
 
         private const float RaycastMaxDistance = 1000f;
 
+        private PlayerManager _playerManager;
         private NavMeshAgent _navMeshAgent;
         private Camera _mainCamera;
 
         protected void Awake()
         {
+            _playerManager = GetComponent<PlayerManager>();
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _mainCamera = Camera.main;
         }
-        
-        protected void Update()
+
+        protected void Start()
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Move();
-            }
+            _playerManager.OnMove += HandleMovement;
         }
 
-        private void Move()
+        protected void OnDestroy()
         {
-            Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+            _playerManager.OnMove -= HandleMovement;
+        }
+
+        private void HandleMovement(Vector3 positionToMove)
+        {
+            Ray ray = _mainCamera.ScreenPointToRay(positionToMove);
 
             if (Physics.Raycast(ray, out RaycastHit hit, RaycastMaxDistance, _raycastGround))
             {
