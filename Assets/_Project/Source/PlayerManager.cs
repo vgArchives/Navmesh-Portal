@@ -7,6 +7,7 @@ namespace TheWatch.Core
     {
         public event Action<Vector3> OnMove;
         public event Action OnCastAbility;
+        public event Action<GameObject> OnEnteredPortal;
 
         protected void Update()
         {
@@ -17,6 +18,14 @@ namespace TheWatch.Core
             else if (Input.GetKeyDown(KeyCode.D))
             {
                 HandleAbilityState();
+            }
+        }
+
+        protected void OnTriggerEnter(Collider other)
+        {
+            if (other.TryGetComponent(out PortalIdentifier _))
+            {
+                OnEnteredPortal?.Invoke(other.gameObject);
             }
         }
 

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3434622345346550306}
   - component: {fileID: 5600392491294591221}
   - component: {fileID: 604564580497265276}
+  - component: {fileID: -1028642509184584526}
   m_Layer: 0
   m_Name: PortalCube
   m_TagString: Untagged
@@ -92,8 +93,20 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2947098648877691092}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.2063258, y: 1.1656036, z: 1.1954665}
+  m_Center: {x: 0.0054296255, y: 0.0013574362, z: 0.010859251}
+--- !u!114 &-1028642509184584526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2947098648877691092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e5daa5ef42be1e4a909dcf059e258c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
