@@ -1015,6 +1015,11 @@ PrefabInstance:
       propertyPath: _createdPortalsList.Array.data[1]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2594514847337972408, guid: bb9f72a65b541784086a0fc0852c8543,
+        type: 3}
+      propertyPath: m_AngularSpeed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2594514847337972409, guid: bb9f72a65b541784086a0fc0852c8543,
         type: 3}
       propertyPath: m_Enabled
@@ -1084,6 +1089,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2594514847337972413, guid: bb9f72a65b541784086a0fc0852c8543,
+        type: 3}
+      propertyPath: _rotationSpeed
+      value: 0.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb9f72a65b541784086a0fc0852c8543, type: 3}

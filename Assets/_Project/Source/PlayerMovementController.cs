@@ -8,9 +8,11 @@ namespace TheWatch.Core
     public class PlayerMovementController : MonoBehaviour
     {
         [SerializeField] private LayerMask _raycastGround;
+        [SerializeField] private float _rotationSpeed = 0.01f;
 
         private const float RaycastMaxDistance = 1000f;
 
+        private float _rotationVelocity;
         private PlayerManager _playerManager;
         private NavMeshAgent _navMeshAgent;
         private Camera _mainCamera;
@@ -40,10 +42,19 @@ namespace TheWatch.Core
         {
             Ray ray = _mainCamera.ScreenPointToRay(positionToMove);
 
-            if (Physics.Raycast(ray, out RaycastHit hit, RaycastMaxDistance, _raycastGround))
+            if (!Physics.Raycast(ray, out RaycastHit hit, RaycastMaxDistance, _raycastGround))
             {
-                _navMeshAgent.destination = hit.point;
+                return;
             }
+
+            _navMeshAgent.destination = hit.point;
+
+            Quaternion lookRotation = Quaternion.LookRotation(hit.point - transform.position);
+
+            float rotationYAxis = Mathf.SmoothDampAngle(transform.eulerAngles.y, lookRotation.eulerAngles.y,
+                ref _rotationVelocity, _rotationSpeed * (Time.deltaTime * _navMeshAgent.speed));
+
+            transform.eulerAngles = new Vector3(0f, rotationYAxis, 0f);
         }
 
         private void HandlePortalEnter(GameObject receivedObject)
