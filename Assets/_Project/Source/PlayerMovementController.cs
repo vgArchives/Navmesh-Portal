@@ -26,12 +26,14 @@ namespace TheWatch.Core
         {
             _playerManager.OnMove += HandleMovement;
             _playerManager.OnEnteredPortal += HandlePortalEnter;
+            _playerManager.OnCastAbility += HandleAbilityCast;
         }
 
         protected void OnDestroy()
         {
             _playerManager.OnMove -= HandleMovement;
             _playerManager.OnEnteredPortal -= HandlePortalEnter;
+            _playerManager.OnCastAbility -= HandleAbilityCast;
         }
 
         private void HandleMovement(Vector3 positionToMove)
@@ -45,6 +47,11 @@ namespace TheWatch.Core
         }
 
         private void HandlePortalEnter(GameObject receivedObject)
+        {
+            _navMeshAgent.ResetPath();
+        }
+
+        private void HandleAbilityCast()
         {
             _navMeshAgent.ResetPath();
         }
