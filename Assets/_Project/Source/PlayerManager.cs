@@ -23,7 +23,7 @@ namespace TheWatch.Core
 
         protected void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out PortalIdentifier _))
+            if (other.TryGetComponent(out PortalEffectController _))
             {
                 OnEnteredPortal?.Invoke(other.gameObject);
             }

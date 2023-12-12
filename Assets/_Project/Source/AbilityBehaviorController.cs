@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 
@@ -15,11 +14,12 @@ namespace TheWatch.Core
         private const float RaycastMaxDistance = 1000f;
         private const int MaxPortalsCount = 2;
         private const int MinPortalsCount = 1;
-        private const float PortalPreparationTime = 1f;
+        private const float PortalPreparationTime = 1.5f;
 
         private PlayerManager _playerManager;
         private Camera _mainCamera;
         private GameplayState _gameplayState;
+
 
         protected void Awake()
         {
@@ -94,23 +94,22 @@ namespace TheWatch.Core
                 return;
             }
 
-            Vector3 portalPosition = new Vector3(hit.point.x, hit.point.y + _portalPrefab.transform.position.y,
-                hit.point.z);
+            Vector3 portalPosition = new (hit.point.x, hit.point.y + _portalPrefab.transform.position.y, hit.point.z);
+            GameObject portalObject;
 
             if (_createdPortalsList.Count >= MaxPortalsCount)
             {
-                GameObject objectToMove = _createdPortalsList[0];
-                objectToMove.transform.position = portalPosition;
-
+                portalObject = _createdPortalsList[0];
                 _createdPortalsList.RemoveAt(0);
-                _createdPortalsList.Add(objectToMove);
             }
             else
             {
-                GameObject portalObject = Instantiate(_portalPrefab, portalPosition, Quaternion.identity);
-                _createdPortalsList.Add(portalObject);
+                portalObject = Instantiate(_portalPrefab, portalPosition, Quaternion.identity);
+                portalObject.SetActive(false);
             }
 
+            portalObject.GetComponent<PortalEffectController>().InitializeEffect(portalPosition);
+            _createdPortalsList.Add(portalObject);
             _gameplayState = GameplayState.None;
         }
 
