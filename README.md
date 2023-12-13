@@ -11,3 +11,7 @@ UI - https://www.kenney.nl/assets/fantasy-ui-borders
 ## Unity common development assets used on the project
 
 https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676
+
+
+https://github.com/vgArchives/TheWatchTest/assets/81108091/6b382554-839b-4c68-a6dd-6e03ceab53a3
+
