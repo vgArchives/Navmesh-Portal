@@ -15,7 +15,7 @@ namespace TheWatch.Core
             {
                 HandleMovingState();
             }
-            else if (Input.GetKeyDown(KeyCode.D))
+            else if (Input.GetKeyDown(KeyCode.R))
             {
                 HandleAbilityState();
             }

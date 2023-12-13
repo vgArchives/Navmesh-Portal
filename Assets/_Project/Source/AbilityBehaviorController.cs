@@ -12,8 +12,6 @@ namespace TheWatch.Core
         [SerializeField] private GameObject _abilityIndicator;
         [SerializeField] private List<GameObject> _createdPortalsList = new List<GameObject>();
 
-        private const int MaxPortalsCount = 2;
-        private const int MinPortalsCount = 1;
         private const float PortalPreparationTime = 1.5f;
 
         private PlayerManager _playerManager;
@@ -102,18 +100,6 @@ namespace TheWatch.Core
             }
 
             Vector3 portalPosition = new (raycastHit.point.x, raycastHit.point.y + _portalPrefab.transform.position.y, raycastHit.point.z);
-
-            // GameObject portalObject;
-            // if (_createdPortalsList.Count >= MaxPortalsCount)
-            // {
-            //     portalObject = _createdPortalsList[0];
-            //     _createdPortalsList.RemoveAt(0);
-            // }
-            // else
-            // {
-            //     portalObject = Instantiate(_portalPrefab, portalPosition, Quaternion.identity);
-            //     portalObject.SetActive(false);
-            // }
 
             GameObject portalObject = _createdPortalsList[0];
             portalObject.GetComponent<PortalEffectController>().InitializeEffect(portalPosition);

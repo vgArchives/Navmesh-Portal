@@ -217,7 +217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tweenEase: 30
   _tweenDuration: 0.5
-  _timeUntilDetroy: 2
+  _timeUntilDetroy: 10
   _fillCircle: {fileID: 8623210576748367329}
 --- !u!1 &6798449266355862113
 GameObject:

@@ -11,6 +11,8 @@ namespace TheWatch.Core
         [SerializeField] private float _timeUntilDetroy = 10f;
         [SerializeField] private Image _fillCircle;
 
+        private Color startColor = Color.green;
+        private Color endColor = Color.red;
         private float _destroyTimer;
 
         public void InitializeEffect(Vector3 finalPosition)
@@ -43,6 +45,7 @@ namespace TheWatch.Core
         {
             float fillAmount = 1 - _destroyTimer / _timeUntilDetroy;
             _fillCircle.fillAmount = fillAmount;
+            _fillCircle.color = Color.Lerp(startColor, endColor, 1 - fillAmount);
         }
     }
 }
