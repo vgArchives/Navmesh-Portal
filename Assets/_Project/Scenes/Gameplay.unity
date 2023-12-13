@@ -1003,37 +1003,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1669329048, guid: bb9f72a65b541784086a0fc0852c8543, type: 3}
-      propertyPath: _createdPortalsList.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1669329048, guid: bb9f72a65b541784086a0fc0852c8543, type: 3}
-      propertyPath: _createdPortalsList.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1669329048, guid: bb9f72a65b541784086a0fc0852c8543, type: 3}
-      propertyPath: _createdPortalsList.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2594514847337972408, guid: bb9f72a65b541784086a0fc0852c8543,
-        type: 3}
-      propertyPath: m_AngularSpeed
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2594514847337972409, guid: bb9f72a65b541784086a0fc0852c8543,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2594514847337972411, guid: bb9f72a65b541784086a0fc0852c8543,
         type: 3}
       propertyPath: m_Name
       value: PlayerCapsule
-      objectReference: {fileID: 0}
-    - target: {fileID: 2594514847337972411, guid: bb9f72a65b541784086a0fc0852c8543,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2594514847337972412, guid: bb9f72a65b541784086a0fc0852c8543,
         type: 3}
@@ -1090,11 +1063,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2594514847337972413, guid: bb9f72a65b541784086a0fc0852c8543,
-        type: 3}
-      propertyPath: _rotationSpeed
-      value: 0.01
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb9f72a65b541784086a0fc0852c8543, type: 3}
 --- !u!1001 &7396287963894356204
@@ -1104,10 +1072,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 639297497}
     m_Modifications:
+    - target: {fileID: 123621834317012453, guid: 12bd0555cfdc68e45b443f4fbe532acb,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 123621834767359764, guid: 12bd0555cfdc68e45b443f4fbe532acb,
         type: 3}
       propertyPath: m_Name
       value: MovingClickEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 123621834767359764, guid: 12bd0555cfdc68e45b443f4fbe532acb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 123621834767359767, guid: 12bd0555cfdc68e45b443f4fbe532acb,
         type: 3}

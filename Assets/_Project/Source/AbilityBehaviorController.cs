@@ -8,23 +8,20 @@ namespace TheWatch.Core
     public class AbilityBehaviorController : MonoBehaviour
     {
         [SerializeField] private GameObject _portalPrefab;
-        [SerializeField] private LayerMask _raycastGround;
+        [SerializeField] private GameObject _abilityIndicator;
         [SerializeField] private List<GameObject> _createdPortalsList = new List<GameObject>();
 
-        private const float RaycastMaxDistance = 1000f;
         private const int MaxPortalsCount = 2;
         private const int MinPortalsCount = 1;
         private const float PortalPreparationTime = 1.5f;
 
         private PlayerManager _playerManager;
-        private Camera _mainCamera;
         private GameplayState _gameplayState;
 
 
         protected void Awake()
         {
             _playerManager = GetComponent<PlayerManager>();
-            _mainCamera = Camera.main;
         }
 
         protected void Start()
@@ -36,9 +33,18 @@ namespace TheWatch.Core
 
         protected void Update()
         {
-            if (Input.GetMouseButtonDown(0) && _gameplayState == GameplayState.AbilityState)
+            if (_gameplayState != GameplayState.AbilityState)
             {
-                PlacePortal(Input.mousePosition);
+                return;
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                PlacePortal();
+            }
+            else
+            {
+                UpdateAbilityIndicatorPosition();
             }
         }
 
@@ -52,11 +58,13 @@ namespace TheWatch.Core
         private void HandleAbilityCast()
         {
             _gameplayState = GameplayState.AbilityState;
+            _abilityIndicator.SetActive(true);
         }
 
         private void HandleMovement(Vector3 positionToMove)
         {
             _gameplayState = GameplayState.MovingState;
+            _abilityIndicator.SetActive(false);
         }
 
         private void HandlePortalEnter(GameObject receivedObject)
@@ -85,16 +93,14 @@ namespace TheWatch.Core
             sequence.AppendCallback(() => SetPortalsColliderState(true));
         }
 
-        private void PlacePortal(Vector3 positionToPlace)
+        private void PlacePortal()
         {
-            Ray ray = _mainCamera.ScreenPointToRay(positionToPlace);
-
-            if (!Physics.Raycast(ray, out RaycastHit hit, RaycastMaxDistance, _raycastGround))
+            if (!RaycastUtils.CheckRaycastFromMouse(out RaycastHit raycastHit))
             {
                 return;
             }
 
-            Vector3 portalPosition = new (hit.point.x, hit.point.y + _portalPrefab.transform.position.y, hit.point.z);
+            Vector3 portalPosition = new (raycastHit.point.x, raycastHit.point.y + _portalPrefab.transform.position.y, raycastHit.point.z);
             GameObject portalObject;
 
             if (_createdPortalsList.Count >= MaxPortalsCount)
@@ -109,8 +115,10 @@ namespace TheWatch.Core
             }
 
             portalObject.GetComponent<PortalEffectController>().InitializeEffect(portalPosition);
+
             _createdPortalsList.Add(portalObject);
             _gameplayState = GameplayState.None;
+            _abilityIndicator.SetActive(false);
         }
 
         private void SetPortalsColliderState(bool state)
@@ -119,6 +127,17 @@ namespace TheWatch.Core
             {
                 portalObject.GetComponent<Collider>().enabled = state;
             }
+        }
+
+        private void UpdateAbilityIndicatorPosition()
+        {
+            if (!RaycastUtils.CheckRaycastFromMouse(out RaycastHit hitInfo))
+            {
+                return;
+            }
+
+            Vector3 pos = new Vector3(hitInfo.point.x, 0.1f, hitInfo.point.z);
+            _abilityIndicator.transform.position = pos;
         }
     }
 }
