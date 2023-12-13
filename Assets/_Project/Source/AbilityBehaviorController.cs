@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 
@@ -40,7 +41,7 @@ namespace TheWatch.Core
 
             if (Input.GetMouseButtonDown(0))
             {
-                PlacePortal();
+                PlacePortal(Input.mousePosition);
             }
             else
             {
@@ -69,7 +70,7 @@ namespace TheWatch.Core
 
         private void HandlePortalEnter(GameObject receivedObject)
         {
-            if (_createdPortalsList.Count <= MinPortalsCount)
+            if (_createdPortalsList.Any(portalObject => !portalObject.activeSelf))
             {
                 return;
             }
@@ -93,29 +94,31 @@ namespace TheWatch.Core
             sequence.AppendCallback(() => SetPortalsColliderState(true));
         }
 
-        private void PlacePortal()
+        private void PlacePortal(Vector3 inputPosition)
         {
-            if (!RaycastUtils.CheckRaycastFromMouse(out RaycastHit raycastHit))
+            if (!RaycastUtils.CheckRaycastFromMouse(out RaycastHit raycastHit, inputPosition))
             {
                 return;
             }
 
             Vector3 portalPosition = new (raycastHit.point.x, raycastHit.point.y + _portalPrefab.transform.position.y, raycastHit.point.z);
-            GameObject portalObject;
 
-            if (_createdPortalsList.Count >= MaxPortalsCount)
-            {
-                portalObject = _createdPortalsList[0];
-                _createdPortalsList.RemoveAt(0);
-            }
-            else
-            {
-                portalObject = Instantiate(_portalPrefab, portalPosition, Quaternion.identity);
-                portalObject.SetActive(false);
-            }
+            // GameObject portalObject;
+            // if (_createdPortalsList.Count >= MaxPortalsCount)
+            // {
+            //     portalObject = _createdPortalsList[0];
+            //     _createdPortalsList.RemoveAt(0);
+            // }
+            // else
+            // {
+            //     portalObject = Instantiate(_portalPrefab, portalPosition, Quaternion.identity);
+            //     portalObject.SetActive(false);
+            // }
 
+            GameObject portalObject = _createdPortalsList[0];
             portalObject.GetComponent<PortalEffectController>().InitializeEffect(portalPosition);
 
+            _createdPortalsList.RemoveAt(0);
             _createdPortalsList.Add(portalObject);
             _gameplayState = GameplayState.None;
             _abilityIndicator.SetActive(false);

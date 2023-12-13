@@ -12,5 +12,11 @@ namespace TheWatch.Core
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             return Physics.Raycast(ray, out hit, RaycastMaxDistance, RaycastLayer);
         }
+
+        public static bool CheckRaycastFromMouse(out RaycastHit hit, Vector3 inputPosition)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(inputPosition);
+            return Physics.Raycast(ray, out hit, RaycastMaxDistance, RaycastLayer);
+        }
     }
 }
