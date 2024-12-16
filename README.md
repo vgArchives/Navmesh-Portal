@@ -1,4 +1,6 @@
-# TheWatchTest
+# Navmesh-Portal
+
+A simple study on navmesh movement and VFX integration of both particle system and VFX Graph. The player can place two portals anywhere on the ground and travel between them while having visual feedback for movement clicks, portal spawns, and cooldowns.
 
 ## Assets used on the project (Only for visual enhancement purposes)
 
